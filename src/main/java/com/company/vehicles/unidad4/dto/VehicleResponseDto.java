@@ -1,3 +1,5 @@
+package com.company.vehicles.unidad4.dto;
+
 public class VehicleResponseDTO{
     public Long id;
     public String brand;

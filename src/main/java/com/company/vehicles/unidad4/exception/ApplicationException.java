@@ -1,3 +1,6 @@
+package com.company.vehicles.unidad4.exception;
+import org.springframework.http.HttpStatus;
+
 public abstract class ApplicationException extends RuntimeException {
 
     private final HttpStatus status;

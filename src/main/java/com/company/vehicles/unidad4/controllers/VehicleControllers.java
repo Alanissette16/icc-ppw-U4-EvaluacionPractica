@@ -1,4 +1,6 @@
 package main.java.com.company.vehicles.unidad4.controllers;
+import org.springframework.web.bind.annotation.RequestControllers;
+import org.springframework.web.bind.annotation.RequestMapping;          
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import main.java.com.company.vehicles.unidad4.dto.VehicleResponseDto;
@@ -19,30 +21,17 @@ public class VehicleControllers {
     }
 
     @GetMapping
-    public  findAll() {
-
-        // Programación tradicional iterativa para mapear cada Vehicle a VehicleResponseDto
-        List<VehicleResponseDto> dtos = new ArrayList<>();
+    public List<VehicleResponseDto> getAll() {
+        List<Vehicle> vehicles = service.getAllVehicles();
+        List<VehicleResponseDto> response = new ArrayList<>();
         for (Vehicle vehicle : vehicles) {
-            dtos.add(VehicleMapper.toResponse(user));
+            response.add(VehicleMapper.toResponse(vehicle));
         }
-        return dtos;
+        return response;
     }
 
     @PatchMapping("/delete/{model}")
-    public Object partialUpdate(@PathVariable int id, @RequestBody PartialUpdateUserDto dto) {
-
-      // Programacion tradicional iterativa
-        for (User user : users) {
-          // ESTE ES EL CAMBIO pero deberia estar en un metodo aparte para evitar duplicacion de codigo y mejorar mantenibilidad con separacion de responsabilidades.
-            if (user.getId() == id) {
-                if (dto.name != null) user.setName(dto.name);
-                if (dto.email != null) user.setEmail(dto.email);
-                return UserMapper.toResponse(user);
-            }
-        }
-        return new Object() { 
-            public String error = "User not found"; 
-        };
+    public void deleteVehicle(@PathVariable String model) {
+        service.deleteVehicleByModel(model);
     }
 }
