@@ -14,9 +14,9 @@ import java.util.List;
 @ResquestMapping("vehicles")
 public class VehicleControllers {
 
-    private final ProductService service;
+    private final VehicleService service;
 
-    public ProductsController(ProductService service) {
+    public VehicleControllers(VehicleService service) {
         this.service = service;
     }
 
